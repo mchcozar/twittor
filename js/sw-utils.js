@@ -5,13 +5,15 @@ function actualizaCacheDinamico( dynamicCache, req, res ) {
 
     return caches.open( dynamicCache ).then( cache => {
 
-      cache.put( req, res.clone() )
+      if(!req.url.startsWith('http')){
+        cache.put( req, res.clone() )
+      }
       return res.clone()
 
     })
   } else {
 
     return res
-    
+
   }
 }
